@@ -4,17 +4,18 @@ module.exports = {
 		"browser" : true,
 		"node" : true,
 	},
-	"parser" : "vue-eslint-parser",
+	// "parser" : "vue-eslint-parser",
 	"extends" : [
 		"@nuxtjs/eslint-config-typescript",
 		"plugin:nuxt/recommended",
 	],
-	"parserOptions" : {
-		"sourceType" : "module",
-		"ecmaVersion" : 2020,
-		"parser" : "babel-eslint",
-	},
+	// "parserOptions" : {
+	// 	"sourceType" : "module",
+	// 	"ecmaVersion" : 2020,
+	// 	"parser" : "babel-eslint",
+	// },
 	"plugins" : [
+		"@typescript-eslint",
 	],
 	// add your custom rules here
 	"rules" : {
@@ -29,6 +30,13 @@ module.exports = {
 					"body" : 1,
 				},
 				"SwitchCase" : 1,
+			},
+		],
+		"@typescript-eslint/type-annotation-spacing" : [
+			"error",
+			{
+				"after" : true,
+				"before" : true,
 			},
 		],
 		"arrow-parens" : [

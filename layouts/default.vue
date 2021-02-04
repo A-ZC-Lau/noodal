@@ -1,7 +1,7 @@
 <template>
-  <div>
-    <Nuxt />
-  </div>
+	<div style="height: 100vh;">
+		<Nuxt />
+	</div>
 </template>
 
 <style>
