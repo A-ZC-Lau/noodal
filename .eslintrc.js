@@ -91,6 +91,7 @@ module.exports = {
 			"error",
 			"always",
 		],
+		"vue/html-self-closing" : "off",
 		"vue/html-indent" : [
 			"error",
 			"tab",
