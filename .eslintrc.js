@@ -91,7 +91,6 @@ module.exports = {
 			"error",
 			"always",
 		],
-		"vue/html-self-closing" : "off",
 		"vue/html-indent" : [
 			"error",
 			"tab",
@@ -101,6 +100,17 @@ module.exports = {
 				"closeBracket" : 0,
 				"alignAttributesVertically" : true,
 				"ignores" : [],
+			},
+		],
+		"vue/html-self-closing" : "off",
+		"vue/max-attributes-per-line" : [
+			"error",
+			{
+				"singleline" : 1,
+				"multiline" : {
+					"max" : 1,
+					"allowFirstLine" : false,
+				},
 			},
 		],
 	},
