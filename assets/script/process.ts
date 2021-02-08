@@ -1,6 +1,7 @@
 export namespace Types {
 	export type node = {
 		description : string // display some under title, rest is popup
+		edges : string[] // id of nodes
 		links : {
 			title : string,
 			url : string
@@ -13,7 +14,6 @@ export namespace Types {
 			y : number,
 			to ?: string
 		}[] // rectangles on the image that can be used to navigate to other places in lieu of viewing it in the boxes i.e. children
-		routes : string[] // id of nodes
 		summary : string
 		title : string // BBL big bold letters
 	}
@@ -30,8 +30,8 @@ export namespace File {
 
 export function createOne () {
 	const output : Types.node = {
-		"routes" : [],
 		"description" : "",
+		"edges" : [],
 		"image" : "",
 		"links" : [],
 		"points_of_interest" : [],

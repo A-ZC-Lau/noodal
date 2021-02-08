@@ -55,12 +55,12 @@
 				</div>
 			</a-space>
 			<a-divider></a-divider>
-			<!-- Routes -->
+			<!-- Edges -->
 			<a-space
 				direction="vertical"
 				style="width: 100%;"
 			>
-				<h1>Routes</h1>
+				<h1>Edges</h1>
 				<div>
 					<a-select
 						show-search
@@ -85,7 +85,7 @@
 				</div>
 				<a-list
 					bordered
-					:data-source="converted_routes"
+					:data-source="converted_edges"
 				>
 					<a-list-item
 						slot="renderItem"
@@ -220,9 +220,9 @@ export default Vue.extend({
 		markdown () : string {
 			return marked(this.my_data.description,);
 		},
-		converted_routes () : converted[] {
+		converted_edges () : converted[] {
 			const output = [];
-			for (const node_id of this.my_data.routes) {
+			for (const node_id of this.my_data.edges) {
 				output.push({
 					"id" : node_id,
 					"title" : "test",
