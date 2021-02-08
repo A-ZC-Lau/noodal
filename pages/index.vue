@@ -1,17 +1,30 @@
 <template>
-	<a-layout style="height: 100%; max-height: 100%;" theme="light">
+	<a-layout
+		style="height: 100%; max-height: 100%;"
+		theme="light"
+	>
 		<a-layout-header style="background-color: white;">
 			<div
 				class="flex"
 			>
 				<div>
 					<a-dropdown>
-						<a class="ant-dropdown-link" @click="e => e.preventDefault()">
+						<a
+							class="ant-dropdown-link"
+							@click="e => e.preventDefault()"
+						>
 							File <a-icon type="down" />
 						</a>
 						<a-menu slot="overlay">
 							<a-menu-item>
-								Import
+								<label>
+									Import
+									<input
+										id="import"
+										type="file"
+										style="visibility: hidden; height: 0; width: 0;"
+									>
+								</label>
 							</a-menu-item>
 							<a-menu-item>
 								Export
@@ -21,70 +34,86 @@
 				</div>
 				<div>
 					<a-dropdown>
-						<a class="ant-dropdown-link" @click="e => e.preventDefault()">
+						<a
+							class="ant-dropdown-link"
+							@click="e => e.preventDefault()"
+						>
 							Create <a-icon type="down" />
 						</a>
 						<a-menu slot="overlay">
 							<a-menu-item>
 								New
 							</a-menu-item>
-							<a-menu-item>
+							<a-menu-item :disabled="current_node === null">
 								Child
 							</a-menu-item>
 						</a-menu>
 					</a-dropdown>
 				</div>
 				<div>
-					<a-button type="primary" @click="showModal">
+					<a-button
+						type="primary"
+						@click="showModal"
+					>
 						Change image
 					</a-button>
 				</div>
 				<div>
-					<a-button type="primary" @click="showModal">
-						Add links
-					</a-button>
-				</div>
-				<div>
-					<a-button type="primary" @click="showModal">
+					<a-button
+						type="primary"
+						@click="showModal"
+					>
 						Point of interest
 					</a-button>
 				</div>
 				<div>
-					<a-button type="primary" @click="showModal">
+					<a-button
+						type="primary"
+						@click="showModal"
+					>
 						Properties
 					</a-button>
+				</div>
+				<div>
+					<b>Current:</b>
 				</div>
 			</div>
 		</a-layout-header>
 		<a-layout>
 			<a-layout-sider>
-				stuff
+				<a-collapse v-model="activeKey">
+					<a-collapse-panel
+						key="1"
+						header="Files"
+					>
+						List of files
+						<ul>
+							<li>
+								Embolden the selected file name
+							</li>
+							<li>
+								Add ability to "create new file"
+							</li>
+						</ul>
+					</a-collapse-panel>
+					<a-collapse-panel
+						key="2"
+						header="Nodes"
+					>
+						more data
+					</a-collapse-panel>
+				</a-collapse>
 			</a-layout-sider>
 			<a-layout>
 				<a-layout-content>
 					<div class="body">
-						<div class="card">
-							card
-						</div>
+						<CardView></CardView>
 					</div>
-					<a-modal
-						title="Image"
+					<PropertiesModal
 						:visible="visible"
-						@ok="handleOk"
-						@cancel="handleCancel"
-					>
-						<a-radio-group default-value="none" button-style="solid">
-							<a-radio-button value="base64">
-								base64
-							</a-radio-button>
-							<a-radio-button value="url">
-								url
-							</a-radio-button>
-							<a-radio-button value="none">
-								None
-							</a-radio-button>
-						</a-radio-group>
-					</a-modal>
+						:handle-cancel="handleCancel"
+						:handle-ok="handleOk"
+					></PropertiesModal>
 				</a-layout-content>
 			</a-layout>
 		</a-layout>
@@ -95,14 +124,29 @@
 import Vue from "vue";
 import * as nanoid from "nanoid";
 
+import CardView from "@/components/pages/index/CardView/CardView.vue";
+import PropertiesModal from "@/components/pages/index/PropertiesModal/index.vue";
+
 export default Vue.extend({
+	"components" : {
+		CardView,
+		PropertiesModal,
+	},
 	data () {
 		return {
-			"selected" : null,
+			"activeKey" : [],
+			"current_node" : null,
 			"image" : {
 				"data" : "",
 				"type" : "",
 			},
+			"radio_buttons" : [
+				"base64",
+				"url",
+				"none",
+			],
+			"selected" : null,
+			"sidebar" : [],
 			"visible" : false,
 		};
 	},
