@@ -55,14 +55,6 @@
 						type="primary"
 						@click="showModal"
 					>
-						Change image
-					</a-button>
-				</div>
-				<div>
-					<a-button
-						type="primary"
-						@click="showModal"
-					>
 						Point of interest
 					</a-button>
 				</div>
@@ -99,6 +91,12 @@
 					<a-collapse-panel
 						key="2"
 						header="Nodes"
+					>
+						more data
+					</a-collapse-panel>
+					<a-collapse-panel
+						key="3"
+						header="History"
 					>
 						more data
 					</a-collapse-panel>

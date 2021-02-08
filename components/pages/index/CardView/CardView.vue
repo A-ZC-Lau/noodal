@@ -1,6 +1,20 @@
 <template>
 	<div class="card">
-		card
+		<a-space
+			direction="vertical"
+			style="width: 100%;"
+		>
+			<div class="title">
+				title
+			</div>
+			<div class="summary">
+				summary
+			</div>
+			<hr>
+			<a-space>
+				<slot></slot>
+			</a-space>
+		</a-space>
 	</div>
 </template>
 
@@ -16,5 +30,16 @@
 		&:hover {
 			border: 0.25rem solid $light;
 		}
+	}
+	.summary {
+		font-style: italic;
+		overflow: hidden;
+		text-overflow: ellipsis;
+	}
+	.title {
+		font-size: 1.5rem;
+		font-weight: bold;
+		overflow: hidden;
+		text-overflow: ellipsis;
 	}
 </style>
