@@ -88,6 +88,7 @@
 					:data-source="converted_edges"
 				>
 					<a-list-item
+						v-if="converted_edges.length"
 						slot="renderItem"
 						slot-scope="item"
 					>
@@ -162,16 +163,38 @@
 			</div>
 			<a-divider></a-divider>
 			<!-- Image -->
-			<div>
+			<a-space
+				direction="vertical"
+				style="width: 100%;"
+			>
 				<h1>Image</h1>
+				<a-radio-group
+					v-model="my_data.image.type"
+					button-style="solid"
+				>
+					<a-radio-button value="base64">
+						base64
+					</a-radio-button>
+					<a-radio-button value="url">
+						url
+					</a-radio-button>
+					<a-radio-button value="svg">
+						svg
+					</a-radio-button>
+				</a-radio-group>
 				<div>
-					<a-input />
+					<a-input v-model="my_data.image.data" />
 				</div>
+				<div
+					v-if="my_data.image === 'svg'"
+					v-html="my_data.image.data"
+				></div>
 				<img
-					src=""
+					v-else
+					:src="my_data.image"
 					style="max-width: 100%;"
 				>
-			</div>
+			</a-space>
 		</a-space>
 	</a-modal>
 </template>

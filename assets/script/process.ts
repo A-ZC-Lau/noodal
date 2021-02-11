@@ -6,7 +6,10 @@ export namespace Types {
 			title : string,
 			url : string
 		}[] // used for urls
-		image ?: string,
+		image ?: {
+			data : string
+			type : "base64"|"svg"|"url"
+		},
 		points_of_interest : {
 			left : number,
 			top : number,
@@ -32,7 +35,10 @@ export function createOne () {
 	const output : Types.node = {
 		"description" : "",
 		"edges" : [],
-		"image" : "",
+		"image" : {
+			"data" : "",
+			"type" : "url",
+		},
 		"links" : [],
 		"points_of_interest" : [],
 		"summary" : "Summary",
