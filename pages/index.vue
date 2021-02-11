@@ -72,13 +72,28 @@
 			</div>
 		</a-layout-header>
 		<a-layout>
-			<a-layout-sider>
-				<a-collapse v-model="activeKey">
+			<a-layout-sider
+				v-model="collapsed"
+				collapsed-width="40"
+				collapsible
+			>
+				<a-collapse
+					v-model="active_key"
+					style="overflow: hidden;"
+				>
 					<a-collapse-panel
 						key="1"
-						header="Files"
+						header="Collections"
 					>
 						List of files
+						<a-collapse v-model="collection_key">
+							<a-collapse-panel
+								key="1"
+								header="Collections"
+							>
+								stuff
+							</a-collapse-panel>
+						</a-collapse>
 						<ul>
 							<li>
 								Embolden the selected file name
@@ -132,8 +147,13 @@ export default Vue.extend({
 	},
 	data () {
 		return {
-			"activeKey" : [],
+			"active_key" : [],
+			"collapsed" : true,
 			"current_node" : null,
+			"file_list" : {
+
+			},
+			"collection_key" : [],
 			"image" : {
 				"data" : "",
 				"type" : "",
@@ -149,10 +169,23 @@ export default Vue.extend({
 		};
 	},
 	"methods" : {
-		createOne () {
+		createCollection () {
+			const file_name = window.prompt("Insert name",);
+			if (!file_name) {
+				return;
+			}
+			if (file_name in this.file_list) {
+				window.alert("This file name is already in use",);
+			}
+			this.file_list[file_name] = {};
+		},
+		deleteCollection () {
+
+		},
+		createNode () {
 			const id = nanoid.nanoid();
 		},
-		deleteOne () {
+		deleteNode () {
 		},
 		handleCancel () {
 			this.visible = false;
