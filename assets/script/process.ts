@@ -6,17 +6,17 @@ export namespace Types {
 			title : string,
 			url : string
 		}[] // used for urls
-		image ?: {
+		image : {
 			data : string
+			points_of_interest : {
+				left : number,
+				top : number,
+				x : number,
+				y : number,
+				to ?: string
+			}[] // rectangles on the image that can be used to navigate to other places in lieu of viewing it in the boxes i.e. children,
 			type : "base64"|"svg"|"url"
 		},
-		points_of_interest : {
-			left : number,
-			top : number,
-			x : number,
-			y : number,
-			to ?: string
-		}[] // rectangles on the image that can be used to navigate to other places in lieu of viewing it in the boxes i.e. children
 		summary : string
 		title : string // BBL big bold letters
 	}
@@ -37,10 +37,10 @@ export function createOne () {
 		"edges" : [],
 		"image" : {
 			"data" : "",
+			"points_of_interest" : [],
 			"type" : "url",
 		},
 		"links" : [],
-		"points_of_interest" : [],
 		"summary" : "Summary",
 		"title" : "New",
 	};

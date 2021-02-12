@@ -16,6 +16,7 @@
     "@nuxtjs/axios": "^5.12.5",
     "ant-design-vue": "^1.7.2",
     "core-js": "^3.8.3",
+    "fabric": "^4.3.1",
     "marked": "^2.0.0",
     "nanoid": "^3.1.20",
     "nuxt": "^2.14.12"
