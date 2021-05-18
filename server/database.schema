@@ -1,0 +1,68 @@
+CREATE TABLE systems (
+    _id int PRIMARY KEY,
+    title text,
+    body text
+);
+CREATE INDEX index_systems_title ON systems (title);
+
+CREATE TABLE components (
+    _id int PRIMARY KEY,
+    title text,
+    body text
+);
+CREATE INDEX index_components_title ON components (title);
+
+CREATE TABLE bugs (
+    _id int PRIMARY KEY,
+    title text,
+    body text
+);
+CREATE INDEX index_bugs_title ON bugs (title);
+
+CREATE TABLE systems_to_systems (
+    origin int NOT NULL,
+    destination int NOT NULL,
+
+    FOREIGN KEY(origin)
+        REFERENCES systems(_id)
+            ON DELETE CASCADE,
+    FOREIGN KEY(destination) 
+        REFERENCES systems(_id)
+            ON DELETE CASCADE
+);
+CREATE UNIQUE INDEX index_systems_to_systems_o_d
+    ON systems_to_systems (origin, destination);
+CREATE UNIQUE INDEX index_systems_to_systems_d_o
+    ON systems_to_systems (destination, origin);
+
+CREATE TABLE systems_to_components (
+    origin int NOT NULL,
+    destination int NOT NULL,
+
+    FOREIGN KEY(origin)
+        REFERENCES systems(_id)
+            ON DELETE CASCADE,
+    FOREIGN KEY(destination) 
+        REFERENCES components(_id)
+            ON DELETE CASCADE
+);
+CREATE UNIQUE INDEX index_systems_to_components_o_d
+    ON systems_to_components (origin, destination);
+CREATE UNIQUE INDEX index_systems_to_components_d_o
+    ON systems_to_components (destination, origin);
+
+CREATE TABLE components_to_bugs (
+    origin int NOT NULL,
+    destination int NOT NULL,
+
+    FOREIGN KEY(origin)
+        REFERENCES components(_id)
+            ON DELETE CASCADE,
+    FOREIGN KEY(destination) 
+        REFERENCES bugs(_id)
+            ON DELETE CASCADE
+);
+CREATE UNIQUE INDEX index_components_to_bugs_o_d
+    ON components_to_bugs (origin, destination);
+CREATE UNIQUE INDEX index_components_to_bugs_d_o
+    ON components_to_bugs (destination, origin);
