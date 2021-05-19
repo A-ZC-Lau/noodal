@@ -66,3 +66,14 @@ CREATE UNIQUE INDEX index_components_to_bugs_o_d
     ON components_to_bugs (origin, destination);
 CREATE UNIQUE INDEX index_components_to_bugs_d_o
     ON components_to_bugs (destination, origin);
+
+CREATE TABLE bug_labels (
+    bug_id int NOT NULL,
+    label text,
+
+    FOREIGN KEY(bug_id)
+        REFERENCES bugs(_id)
+            ON DELETE CASCADE
+);
+CREATE INDEX index_bug_labels
+    ON bug_labels (label);
