@@ -20,52 +20,52 @@ CREATE TABLE bugs (
 CREATE INDEX index_bugs_title ON bugs (title);
 
 CREATE TABLE systems_to_systems (
-    origin int NOT NULL,
-    destination int NOT NULL,
+    origin_id int NOT NULL,
+    destination_id int NOT NULL,
 
-    FOREIGN KEY(origin)
+    FOREIGN KEY(origin_id)
         REFERENCES systems(_id)
             ON DELETE CASCADE,
-    FOREIGN KEY(destination) 
+    FOREIGN KEY(destination_id) 
         REFERENCES systems(_id)
             ON DELETE CASCADE
 );
 CREATE UNIQUE INDEX index_systems_to_systems_o_d
-    ON systems_to_systems (origin, destination);
+    ON systems_to_systems (origin_id, destination_id);
 CREATE UNIQUE INDEX index_systems_to_systems_d_o
-    ON systems_to_systems (destination, origin);
+    ON systems_to_systems (destination_id, origin_id);
 
 CREATE TABLE systems_to_components (
-    origin int NOT NULL,
-    destination int NOT NULL,
+    origin_id int NOT NULL,
+    destination_id int NOT NULL,
 
-    FOREIGN KEY(origin)
+    FOREIGN KEY(origin_id)
         REFERENCES systems(_id)
             ON DELETE CASCADE,
-    FOREIGN KEY(destination) 
+    FOREIGN KEY(destination_id) 
         REFERENCES components(_id)
             ON DELETE CASCADE
 );
 CREATE UNIQUE INDEX index_systems_to_components_o_d
-    ON systems_to_components (origin, destination);
+    ON systems_to_components (origin_id, destination_id);
 CREATE UNIQUE INDEX index_systems_to_components_d_o
-    ON systems_to_components (destination, origin);
+    ON systems_to_components (destination_id, origin_id);
 
 CREATE TABLE components_to_bugs (
-    origin int NOT NULL,
-    destination int NOT NULL,
+    origin_id int NOT NULL,
+    destination_id int NOT NULL,
 
-    FOREIGN KEY(origin)
+    FOREIGN KEY(origin_id)
         REFERENCES components(_id)
             ON DELETE CASCADE,
-    FOREIGN KEY(destination) 
+    FOREIGN KEY(destination_id) 
         REFERENCES bugs(_id)
             ON DELETE CASCADE
 );
 CREATE UNIQUE INDEX index_components_to_bugs_o_d
-    ON components_to_bugs (origin, destination);
+    ON components_to_bugs (origin_id, destination_id);
 CREATE UNIQUE INDEX index_components_to_bugs_d_o
-    ON components_to_bugs (destination, origin);
+    ON components_to_bugs (destination_id, origin_id);
 
 CREATE TABLE bug_labels (
     bug_id int NOT NULL,
@@ -75,5 +75,7 @@ CREATE TABLE bug_labels (
         REFERENCES bugs(_id)
             ON DELETE CASCADE
 );
+CREATE INDEX index_bug_id
+    ON bug_labels (bug_id);
 CREATE INDEX index_bug_labels
     ON bug_labels (label);
