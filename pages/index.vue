@@ -13,31 +13,6 @@
 							class="ant-dropdown-link"
 							@click="e => e.preventDefault()"
 						>
-							File <a-icon type="down" />
-						</a>
-						<a-menu slot="overlay">
-							<a-menu-item>
-								<label>
-									Import
-									<input
-										id="import"
-										type="file"
-										style="visibility: hidden; height: 0; width: 0;"
-									>
-								</label>
-							</a-menu-item>
-							<a-menu-item>
-								Export
-							</a-menu-item>
-						</a-menu>
-					</a-dropdown>
-				</div>
-				<div>
-					<a-dropdown>
-						<a
-							class="ant-dropdown-link"
-							@click="e => e.preventDefault()"
-						>
 							Create <a-icon type="down" />
 						</a>
 						<a-menu slot="overlay">
@@ -55,7 +30,7 @@
 						type="primary"
 						@click="showModal"
 					>
-						Point of interest
+						Image
 					</a-button>
 				</div>
 				<div>
@@ -72,51 +47,6 @@
 			</div>
 		</a-layout-header>
 		<a-layout>
-			<a-layout-sider
-				v-model="collapsed"
-				collapsed-width="40"
-				collapsible
-			>
-				<a-collapse
-					v-model="active_key"
-					style="overflow: hidden;"
-				>
-					<a-collapse-panel
-						key="1"
-						header="Collections"
-					>
-						List of files
-						<a-collapse v-model="collection_key">
-							<a-collapse-panel
-								key="1"
-								header="Collections"
-							>
-								stuff
-							</a-collapse-panel>
-						</a-collapse>
-						<ul>
-							<li>
-								Embolden the selected file name
-							</li>
-							<li>
-								Add ability to "create new file"
-							</li>
-						</ul>
-					</a-collapse-panel>
-					<a-collapse-panel
-						key="2"
-						header="Nodes"
-					>
-						more data
-					</a-collapse-panel>
-					<a-collapse-panel
-						key="3"
-						header="History"
-					>
-						more data
-					</a-collapse-panel>
-				</a-collapse>
-			</a-layout-sider>
 			<a-layout>
 				<a-layout-content>
 					<div class="body">
@@ -137,14 +67,7 @@
 import Vue from "vue";
 import * as nanoid from "nanoid";
 
-import CardView from "@/components/pages/index/CardView/CardView.vue";
-import PropertiesModal from "@/components/pages/index/PropertiesModal/index.vue";
-
 export default Vue.extend({
-	"components" : {
-		CardView,
-		PropertiesModal,
-	},
 	data () {
 		return {
 			"active_key" : [],
@@ -170,14 +93,7 @@ export default Vue.extend({
 	},
 	"methods" : {
 		createCollection () {
-			const file_name = window.prompt("Insert name",);
-			if (!file_name) {
-				return;
-			}
-			if (file_name in this.file_list) {
-				window.alert("This file name is already in use",);
-			}
-			this.file_list[file_name] = {};
+			const fileName = window.prompt("Insert title",);
 		},
 		deleteCollection () {
 
